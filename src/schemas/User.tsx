@@ -1,4 +1,5 @@
 import { buildSchema } from "@camberi/firecms";
+const uuid = require('uuid');
 
 export type User = {
     uid: string,
@@ -58,8 +59,22 @@ export const usersSchema = buildSchema<User>({
         },
         imageUrl: {
             title: "Image url",
+            description: "user profile picture",
             validation: { required: true },
-            dataType: "string"
+            dataType: "string",
+            config: {
+                url: true,
+                storageMeta: {
+                    mediaType: "image",
+                    storagePath: (context) => {
+                        return "images";
+                    },
+                    acceptedFiles: ["image/*"],
+                    fileName: (context) => {
+                        return uuid.v4();
+                    }
+                }
+            }
         },
         name: {
             title: "Name",

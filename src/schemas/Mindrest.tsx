@@ -1,4 +1,5 @@
 import { buildSchema } from "@camberi/firecms"
+const uuid = require('uuid');
 
 export type Mindrest = {
     bannerUrl: string,
@@ -13,9 +14,22 @@ export const mindrestSchema = buildSchema<Mindrest>({
     name: "Mindrest",
     properties: {
         bannerUrl: {
-            title: "Banner url",
+            title: "Banner image",
             validation: { required: true },
-            dataType: "string"
+            dataType: "string",
+            config: {
+                url: true,
+                storageMeta: {
+                    mediaType: "image",
+                    storagePath: (context) => {
+                        return "images";
+                    },
+                    acceptedFiles: ["image/*"],
+                    fileName: (context) => {
+                        return uuid.v4();
+                    }
+                }
+            }
         },
         description: {
             title: "Description",
@@ -38,9 +52,22 @@ export const mindrestSchema = buildSchema<Mindrest>({
             dataType: "string"
         },
         videoUrl: {
-            title: "Video url",
+            title: "Video",
             validation: { required: true },
-            dataType: "string"
+            dataType: "string",
+            config: {
+                url: true,
+                storageMeta: {
+                    mediaType: "video",
+                    storagePath: (context) => {
+                        return "videos";
+                    },
+                    acceptedFiles: ["video/*"],
+                    fileName: (context) => {
+                        return uuid.v4();
+                    }
+                }
+            }
         },
     }
 })

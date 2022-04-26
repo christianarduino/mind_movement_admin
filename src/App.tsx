@@ -108,6 +108,10 @@ export default function App() {
   return <FirebaseCMSApp
     name={"Mind Movement Admin"}
     authentication={myAuthenticator}
+    signInOptions={[
+      'password',
+      'google.com',
+    ]}
     navigation={navigation}
     firebaseConfig={firebaseConfig}
   />;

@@ -1,4 +1,5 @@
 import { buildSchema } from "@camberi/firecms"
+const uuid = require('uuid');
 
 export type Resources = {
     title: string,
@@ -20,9 +21,22 @@ export const resourcesSchema = buildSchema<Resources>({
             dataType: "string"
         },
         videoUrl: {
-            title: "Video url",
+            title: "Video",
             validation: { required: true },
-            dataType: "string"
+            dataType: "string",
+            config: {
+                url: true,
+                storageMeta: {
+                    mediaType: "video",
+                    storagePath: (context) => {
+                        return "videos";
+                    },
+                    acceptedFiles: ["video/*"],
+                    fileName: (context) => {
+                        return uuid.v4();
+                    }
+                }
+            }
         },
     }
 })

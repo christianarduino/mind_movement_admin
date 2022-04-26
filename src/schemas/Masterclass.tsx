@@ -1,4 +1,5 @@
 import { buildSchema } from "@camberi/firecms";
+const uuid = require('uuid');
 
 export type Masterclass = {
     description: string,
@@ -40,14 +41,41 @@ export const masterclassSchema = buildSchema<Masterclass>({
             dataType: "string"
         },
         imageBannerUrl: {
-            title: "Description",
+            title: "Banner image",
             validation: { required: true },
-            dataType: "string"
+            dataType: "string",
+            config: {
+                url: true,
+                storageMeta: {
+                    mediaType: "image",
+                    storagePath: (context) => {
+                        return "images";
+                    },
+                    acceptedFiles: ["image/*"],
+                    fileName: (context) => {
+                        return uuid.v4();
+                    }
+                }
+            }
+            
         },
         introVideoUrl: {
-            title: "Description",
+            title: "Intro video",
             validation: { required: true },
-            dataType: "string"
+            dataType: "string",
+            config: {
+                url: true,
+                storageMeta: {
+                    mediaType: "video",
+                    storagePath: (context) => {
+                        return "videos";
+                    },
+                    acceptedFiles: ["video/*"],
+                    fileName: (context) => {
+                        return uuid.v4();
+                    }
+                }
+            }
         },
         title: {
             title: "Title",
@@ -61,9 +89,22 @@ export const masterclassSchema = buildSchema<Masterclass>({
                 dataType: "map",
                 properties: {
                     bannerUrl: {
-                        title: "Banner url",
+                        title: "Course banner image",
                         validation: { required: true },
-                        dataType: "string"
+                        dataType: "string",
+                        config: {
+                            url: true,
+                            storageMeta: {
+                                mediaType: "image",
+                                storagePath: (context) => {
+                                    return "images";
+                                },
+                                acceptedFiles: ["image/*"],
+                                fileName: (context) => {
+                                    return uuid.v4();
+                                }
+                            }
+                        }
                     },
                     description: {
                         title: "Description",
@@ -88,7 +129,20 @@ export const masterclassSchema = buildSchema<Masterclass>({
                     videoUrl: {
                         title: "Video url",
                         validation: { required: true },
-                        dataType: "string"
+                        dataType: "string",
+                        config: {
+                            url: true,
+                            storageMeta: {
+                                mediaType: "video",
+                                storagePath: (context) => {
+                                    return "videos";
+                                },
+                                acceptedFiles: ["video/*"],
+                                fileName: (context) => {
+                                    return uuid.v4();
+                                }
+                            }
+                        }
                     },
                     videos: {
                         dataType: "array",
@@ -98,7 +152,20 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                 bannerUrl: {
                                     title: "Banner url",
                                     validation: { required: true },
-                                    dataType: "string"
+                                    dataType: "string",
+                                    config: {
+                                        url: true,
+                                        storageMeta: {
+                                            mediaType: "image",
+                                            storagePath: (context) => {
+                                                return "images";
+                                            },
+                                            acceptedFiles: ["image/*"],
+                                            fileName: (context) => {
+                                                return uuid.v4();
+                                            }
+                                        }
+                                    }
                                 },
                                 description: {
                                     title: "Description",
@@ -113,7 +180,20 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                 videoUrl: {
                                     title: "Video Url",
                                     validation: { required: true },
-                                    dataType: "string"
+                                    dataType: "string",
+                                    config: {
+                                        url: true,
+                                        storageMeta: {
+                                            mediaType: "video",
+                                            storagePath: (context) => {
+                                                return "videos";
+                                            },
+                                            acceptedFiles: ["video/*"],
+                                            fileName: (context) => {
+                                                return uuid.v4();
+                                            }
+                                        }
+                                    }
                                 },
                             }
                         }
