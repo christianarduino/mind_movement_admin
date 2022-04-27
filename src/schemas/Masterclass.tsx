@@ -1,4 +1,5 @@
 import { buildSchema } from "@camberi/firecms";
+import CustomIdField from "../custom_id_field";
 const uuid = require('uuid');
 
 export type Masterclass = {
@@ -11,6 +12,7 @@ export type Masterclass = {
 }
 
 export type Course = {
+    id: string,
     bannerUrl: string,
     description: string,
     isAVideoForPremiumUsers: boolean,
@@ -21,6 +23,7 @@ export type Course = {
 }
 
 export type Video = {
+    id: string,
     bannerUrl: string,
     description: string,
     title: string,
@@ -32,6 +35,14 @@ export const masterclassSchema = buildSchema<Masterclass>({
     properties: {
         id: {
             title: "Id",
+            dataType: "string",
+            disabled: true,
+            config: {
+                Field: CustomIdField,
+            }
+        },
+        title: {
+            title: "Title",
             validation: { required: true },
             dataType: "string"
         },
@@ -77,17 +88,21 @@ export const masterclassSchema = buildSchema<Masterclass>({
                 }
             }
         },
-        title: {
-            title: "Title",
-            validation: { required: true },
-            dataType: "string"
-        },
         courses: {
             title: "Courses",
             dataType: "array",
             of: {
                 dataType: "map",
+                title:"Course",
                 properties: {
+                    id: {
+                        title: "Id",
+                        dataType: "string",
+                        disabled: true,
+                        config: {
+                            Field: CustomIdField,
+                        }
+                    },
                     bannerUrl: {
                         title: "Course banner image",
                         validation: { required: true },
@@ -146,9 +161,19 @@ export const masterclassSchema = buildSchema<Masterclass>({
                     },
                     videos: {
                         dataType: "array",
+                        title: "Videos",
                         of: {
                             dataType: "map",
+                            title:"Video",
                             properties: {
+                                id: {
+                                    title: "Id",
+                                    dataType: "string",
+                                    disabled: true,
+                                    config: {
+                                        Field: CustomIdField,
+                                    }
+                                },
                                 bannerUrl: {
                                     title: "Banner url",
                                     validation: { required: true },

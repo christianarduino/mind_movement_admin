@@ -106,6 +106,8 @@ export default function App() {
   };
 
   return <FirebaseCMSApp
+    logo="logo.png"
+    
     name={"Mind Movement Admin"}
     authentication={myAuthenticator}
     signInOptions={[
