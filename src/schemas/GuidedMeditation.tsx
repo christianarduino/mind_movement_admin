@@ -18,6 +18,7 @@ export const guidedMeditations = buildSchema<GuidedMeditation>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "image",
                     storagePath: (context) => {
                         return "images";
@@ -51,6 +52,7 @@ export const guidedMeditations = buildSchema<GuidedMeditation>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "video",
                     storagePath: (context) => {
                         return "videos";

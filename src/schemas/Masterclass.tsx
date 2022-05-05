@@ -58,6 +58,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "image",
                     storagePath: (context) => {
                         return "images";
@@ -77,6 +78,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "video",
                     storagePath: (context) => {
                         return "videos";
@@ -110,6 +112,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                         config: {
                             url: true,
                             storageMeta: {
+                                storeUrl: true,
                                 mediaType: "image",
                                 storagePath: (context) => {
                                     return "images";
@@ -148,6 +151,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                         config: {
                             url: true,
                             storageMeta: {
+                                storeUrl: true,
                                 mediaType: "video",
                                 storagePath: (context) => {
                                     return "videos";
@@ -181,6 +185,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                     config: {
                                         url: true,
                                         storageMeta: {
+                                            storeUrl: true,
                                             mediaType: "image",
                                             storagePath: (context) => {
                                                 return "images";
@@ -209,6 +214,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                     config: {
                                         url: true,
                                         storageMeta: {
+                                            storeUrl: true,
                                             mediaType: "video",
                                             storagePath: (context) => {
                                                 return "videos";

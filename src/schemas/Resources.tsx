@@ -25,8 +25,8 @@ export const resourcesSchema = buildSchema<Resources>({
             validation: { required: true },
             dataType: "string",
             config: {
-                url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "video",
                     storagePath: (context) => {
                         return "videos";

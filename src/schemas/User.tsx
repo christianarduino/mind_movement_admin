@@ -65,6 +65,7 @@ export const usersSchema = buildSchema<User>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "image",
                     storagePath: (context) => {
                         return "images";

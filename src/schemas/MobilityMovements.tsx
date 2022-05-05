@@ -20,6 +20,7 @@ export const mobilityMovementsSchema = buildSchema<MobilityMovements>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "image",
                     storagePath: (context) => {
                         return "images";
@@ -58,6 +59,7 @@ export const mobilityMovementsSchema = buildSchema<MobilityMovements>({
             config: {
                 url: true,
                 storageMeta: {
+                    storeUrl: true,
                     mediaType: "video",
                     storagePath: (context) => {
                         return "videos";
