@@ -11,7 +11,6 @@ import {
 } from "@camberi/firecms";
 
 import "typeface-rubik";
-import "typeface-space-mono";
 import { guidedMeditations } from "./schemas/GuidedMeditation";
 import { masterclassSchema } from "./schemas/Masterclass";
 import { mindrestSchema } from "./schemas/Mindrest";
@@ -40,33 +39,33 @@ export default function App() {
       collections: [
         buildCollection({
           path: "guided_meditations",
-          schema: guidedMeditations,
+          properties: guidedMeditations,
           name: "Guided Meditations",
         }),
         buildCollection({
           path: "masterclass",
-          schema: masterclassSchema,
+          properties: masterclassSchema,
           name: "MasterClass",
         }),
         buildCollection({
           path: "mindrests",
-          schema: mindrestSchema,
+          properties: mindrestSchema,
           name: "Mindrests",
         }),
         buildCollection({
           path: "mobility_movements",
-          schema: mobilityMovementsSchema,
+          properties: mobilityMovementsSchema,
           name: "Mobility Movements",
         }),
         buildCollection({
           path: "resources",
-          schema: resourcesSchema,
+          properties: resourcesSchema,
           name: "Resources",
 
         }),
         buildCollection({
           path: "users",
-          schema: usersSchema,
+          properties: usersSchema,
           name: "Users",
           permissions: ({ authController }) => ({
             delete: false

@@ -22,11 +22,11 @@ export const mobilityMovementsSchema = buildSchema<MobilityMovements>({
                 storageMeta: {
                     storeUrl: true,
                     mediaType: "image",
-                    storagePath: (context) => {
+                    storagePath: () => {
                         return "images";
                     },
                     acceptedFiles: ["image/*"],
-                    fileName: (context) => {
+                    fileName: () => {
                         return uuid.v4();
                     }
                 }
@@ -61,11 +61,11 @@ export const mobilityMovementsSchema = buildSchema<MobilityMovements>({
                 storageMeta: {
                     storeUrl: true,
                     mediaType: "video",
-                    storagePath: (context) => {
+                    storagePath: () => {
                         return "videos";
                     },
                     acceptedFiles: ["video/*"],
-                    fileName: (context) => {
+                    fileName: () => {
                         return uuid.v4();
                     }
                 }

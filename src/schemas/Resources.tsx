@@ -28,11 +28,11 @@ export const resourcesSchema = buildSchema<Resources>({
                 storageMeta: {
                     storeUrl: true,
                     mediaType: "video",
-                    storagePath: (context) => {
+                    storagePath: () => {
                         return "videos";
                     },
                     acceptedFiles: ["video/*"],
-                    fileName: (context) => {
+                    fileName: () => {
                         return uuid.v4();
                     }
                 }

@@ -67,11 +67,11 @@ export const usersSchema = buildSchema<User>({
                 storageMeta: {
                     storeUrl: true,
                     mediaType: "image",
-                    storagePath: (context) => {
+                    storagePath: () => {
                         return "images";
                     },
                     acceptedFiles: ["image/*"],
-                    fileName: (context) => {
+                    fileName: () => {
                         return uuid.v4();
                     }
                 }
