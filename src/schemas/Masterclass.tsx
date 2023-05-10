@@ -1,6 +1,10 @@
-import { buildSchema } from "@camberi/firecms";
+
+import {
+    buildProperty,
+    buildCollection,
+} from "firecms";
 import CustomIdField from "../custom_id_field";
-const uuid = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 export type Masterclass = {
     description: string,
@@ -30,29 +34,30 @@ export type Video = {
     videoUrl: string,
 }
 
-export const masterclassSchema = buildSchema<Masterclass>({
+export const masterclassCollection = buildCollection<Masterclass>({
     name: "Masterclass",
+    path: "masterclass", 
     properties: {
-        id: {
-            title: "Id",
+        id: buildProperty({
+            name: "Id",
             dataType: "string",
             disabled: true,
             config: {
                 Field: CustomIdField,
             }
-        },
-        title: {
-            title: "Title",
+        }),
+        title: buildProperty({
+            name: "Title",
             validation: { required: true },
             dataType: "string"
-        },
-        description: {
-            title: "Description",
+        }),
+        description: buildProperty({
+            name: "Description",
             validation: { required: true },
             dataType: "string"
-        },
-        imageBannerUrl: {
-            title: "Banner image",
+        }),
+        imageBannerUrl: buildProperty({
+            name: "Banner image",
             validation: { required: true },
             dataType: "string",
             config: {
@@ -65,14 +70,14 @@ export const masterclassSchema = buildSchema<Masterclass>({
                     },
                     acceptedFiles: ["image/*"],
                     fileName: () => {
-                        return uuid.v4();
+                        return uuid();
                     }
                 }
             }
-            
-        },
-        introVideoUrl: {
-            title: "Intro video",
+
+        }),
+        introVideoUrl: buildProperty({
+            name: "Intro video",
             validation: { required: true },
             dataType: "string",
             config: {
@@ -85,20 +90,20 @@ export const masterclassSchema = buildSchema<Masterclass>({
                     },
                     acceptedFiles: ["video/*"],
                     fileName: () => {
-                        return uuid.v4();
+                        return uuid();
                     }
                 }
             }
-        },
-        courses: {
-            title: "Courses",
+        }),
+        courses: buildProperty({
+            name: "Courses",
             dataType: "array",
             of: {
                 dataType: "map",
-                title:"Course",
+                name: "Course",
                 properties: {
                     id: {
-                        title: "Id",
+                        name: "Id",
                         dataType: "string",
                         disabled: true,
                         config: {
@@ -106,7 +111,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                         }
                     },
                     bannerUrl: {
-                        title: "Course banner image",
+                        name: "Course banner image",
                         validation: { required: true },
                         dataType: "string",
                         config: {
@@ -119,33 +124,33 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                 },
                                 acceptedFiles: ["image/*"],
                                 fileName: () => {
-                                    return uuid.v4();
+                                    return uuid();
                                 }
                             }
                         }
                     },
                     description: {
-                        title: "Description",
+                        name: "Description",
                         validation: { required: true },
                         dataType: "string"
                     },
                     isAVideoForPremiumUsers: {
-                        title: "Is a premium video?",
+                        name: "Is a premium video?",
                         validation: { required: true },
                         dataType: "boolean"
                     },
                     title: {
-                        title: "Title",
+                        name: "Title",
                         validation: { required: true },
                         dataType: "string"
                     },
                     videoLength: {
-                        title: "Video length",
+                        name: "Video length",
                         validation: { required: true },
                         dataType: "string"
                     },
                     videoUrl: {
-                        title: "Video url",
+                        name: "Video url",
                         validation: { required: true },
                         dataType: "string",
                         config: {
@@ -158,20 +163,20 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                 },
                                 acceptedFiles: ["video/*"],
                                 fileName: () => {
-                                    return uuid.v4();
+                                    return uuid();
                                 }
                             }
                         }
                     },
                     videos: {
                         dataType: "array",
-                        title: "Videos",
+                        name: "Videos",
                         of: {
                             dataType: "map",
-                            title:"Video",
+                            name: "Video",
                             properties: {
                                 id: {
-                                    title: "Id",
+                                    name: "Id",
                                     dataType: "string",
                                     disabled: true,
                                     config: {
@@ -179,7 +184,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                     }
                                 },
                                 bannerUrl: {
-                                    title: "Banner url",
+                                    name: "Banner url",
                                     validation: { required: true },
                                     dataType: "string",
                                     config: {
@@ -192,23 +197,23 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                             },
                                             acceptedFiles: ["image/*"],
                                             fileName: () => {
-                                                return uuid.v4();
+                                                return uuid();
                                             }
                                         }
                                     }
                                 },
                                 description: {
-                                    title: "Description",
+                                    name: "Description",
                                     validation: { required: true },
                                     dataType: "string"
                                 },
                                 title: {
-                                    title: "Title",
+                                    name: "Title",
                                     validation: { required: true },
                                     dataType: "string"
                                 },
                                 videoUrl: {
-                                    title: "Video Url",
+                                    name: "Video Url",
                                     validation: { required: true },
                                     dataType: "string",
                                     config: {
@@ -221,7 +226,7 @@ export const masterclassSchema = buildSchema<Masterclass>({
                                             },
                                             acceptedFiles: ["video/*"],
                                             fileName: () => {
-                                                return uuid.v4();
+                                                return uuid();
                                             }
                                         }
                                     }
@@ -231,6 +236,6 @@ export const masterclassSchema = buildSchema<Masterclass>({
                     }
                 },
             }
-        }
+        })
     }
 })

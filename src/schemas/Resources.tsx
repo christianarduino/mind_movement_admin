@@ -1,5 +1,9 @@
-import { buildSchema } from "@camberi/firecms"
-const uuid = require('uuid');
+import {
+    buildProperty,
+    buildCollection,
+} from "firecms";
+import { v4 as uuid } from 'uuid';
+
 
 export type Resources = {
     title: string,
@@ -7,21 +11,22 @@ export type Resources = {
     videoUrl: string,
 }
 
-export const resourcesSchema = buildSchema<Resources>({
-    name: "Mobility Movements",
+export const resourcesCollection = buildCollection<Resources>({
+    path: "resources",
+    name: "Resources",
     properties: {
-        description: {
-            title: "Description",
+        description: buildProperty({
+            name: "Description",
             validation: { required: true },
             dataType: "string"
-        },
-        title: {
-            title: "Title",
+        }),
+        title: buildProperty({
+            name: "Title",
             validation: { required: true },
             dataType: "string"
-        },
-        videoUrl: {
-            title: "Video",
+        }),
+        videoUrl: buildProperty({
+            name: "Video",
             validation: { required: true },
             dataType: "string",
             config: {
@@ -33,10 +38,10 @@ export const resourcesSchema = buildSchema<Resources>({
                     },
                     acceptedFiles: ["video/*"],
                     fileName: () => {
-                        return uuid.v4();
+                        return uuid();
                     }
                 }
             }
-        },
-    }
+        }),
+    },
 })

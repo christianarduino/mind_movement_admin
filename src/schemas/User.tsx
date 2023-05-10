@@ -1,5 +1,10 @@
-import { buildSchema } from "@camberi/firecms";
-const uuid = require('uuid');
+import {
+    buildProperty,
+    buildCollection,
+} from "firecms";
+import { v4 as uuid } from 'uuid';
+
+
 
 export type User = {
     uid: string,
@@ -32,16 +37,20 @@ export type User = {
     },
 }
 
-export const usersSchema = buildSchema<User>({
-    name: "User",
+export const usersCollection = buildCollection({
+    path: "users",
+    name: "Users",
+    permissions: ({ authController }) => ({
+        delete: false
+    }),
     properties: {
-        uid: {
-            title: "UID",
+        uid: buildProperty({
+            name: "UID",
             validation: { required: true },
             dataType: "string"
-        },
-        role: {
-            title: "Role",
+        }),
+        role: buildProperty({
+            name: "Role",
             validation: { required: true },
             dataType: "string",
             config: {
@@ -50,15 +59,15 @@ export const usersSchema = buildSchema<User>({
                     user: "User",
                 }
             }
-        },
-        email: {
-            title: "EMail",
+        }),
+        email: buildProperty({
+            name: "EMail",
             validation: { required: true, email: true },
             dataType: "string",
             readOnly: true,
-        },
-        imageUrl: {
-            title: "Image url",
+        }),
+        imageUrl: buildProperty({
+            name: "Image url",
             description: "user profile picture",
             validation: { required: true },
             dataType: "string",
@@ -72,110 +81,180 @@ export const usersSchema = buildSchema<User>({
                     },
                     acceptedFiles: ["image/*"],
                     fileName: () => {
-                        return uuid.v4();
+                        return uuid();
                     }
                 }
             }
-        },
-        name: {
-            title: "Name",
+        }),
+        name: buildProperty({
+            name: "Name",
             validation: { required: true },
             dataType: "string"
-        },
-        personTitle: {
-            title: "Person title",
+        }),
+        personTitle: buildProperty({
+            name: "Person title",
             validation: { required: true },
             dataType: "string"
-        },
-        phone: {
-            title: "Phone",
+        }),
+        phone: buildProperty({
+            name: "Phone",
             validation: { required: true },
             dataType: "string"
-        },
-        surname: {
-            title: "Surname",
+        }),
+        surname: buildProperty({
+            name: "Surname",
             validation: { required: true },
             dataType: "string"
-        },
-        username: {
-            title: "Username",
+        }),
+        username: buildProperty({
+            name: "Username",
             validation: { required: true },
             dataType: "string"
-        },
-        pushNotification: {
-            title: "Push Notification",
+        }),
+        pushNotification: buildProperty({
+            name: "Push Notification",
             validation: { required: true },
             dataType: "boolean"
-        },
-        isComplete: {
-            title: "Profile complete",
+        }),
+        isComplete: buildProperty({
+            name: "Profile complete",
             validation: { required: true },
             dataType: "boolean"
-        },
-        goal: {
+        }),
+        goal: buildProperty({
             dataType: "map",
+            expanded: true,
             properties: {
                 breakOldHabits: {
-                    title: "Break old habits",
+                    name: "Break old habits",
                     dataType: "boolean"
                 },
                 calmMind: {
-                    title: "Calm mind",
+                    name: "Calm mind",
                     dataType: "boolean"
                 },
                 dealWithCriticismAndNegativity: {
-                    title: "Deal with criticism and negativity",
+                    name: "Deal with criticism and negativity",
                     dataType: "boolean"
                 },
                 dealWithStress: {
-                    title: "Deal with stress",
+                    name: "Deal with stress",
                     dataType: "boolean"
                 },
                 developNewHabits: {
-                    title: "Develop new habits",
+                    name: "Develop new habits",
                     dataType: "boolean"
                 },
                 doesNotMatter: {
-                    title: "Does not matter",
+                    name: "Does not matter",
                     dataType: "boolean"
                 },
                 enhanceYourEnergyLevel: {
-                    title: "Enhance your energy level",
+                    name: "Enhance your energy level",
                     dataType: "boolean"
                 },
                 gainBetterFocusAndWillpower: {
-                    title: "Gain better focus and willpower",
+                    name: "Gain better focus and willpower",
                     dataType: "boolean"
                 },
                 getRidOfInsecurity: {
-                    title: "Get rid of insecurity",
+                    name: "Get rid of insecurity",
                     dataType: "boolean"
                 },
                 max15minPerDay: {
-                    title: "Max15min per day",
+                    name: "Max15min per day",
                     dataType: "boolean"
                 },
                 max1hoursPerDay: {
-                    title: "Max1hours per day",
+                    name: "Max1hours per day",
                     dataType: "boolean"
                 },
                 max2hoursPerDay: {
-                    title: "Max2hours per day",
+                    name: "Max2hours per day",
                     dataType: "boolean"
                 },
                 oneTimePerWeek: {
-                    title: "One time per week",
+                    name: "One time per week",
                     dataType: "boolean"
                 },
                 releaseTensionInMyBody: {
-                    title: "Release tension in my body",
+                    name: "Release tension in my body",
                     dataType: "boolean"
                 },
                 sleepBetter: {
-                    title: "Sleep better",
+                    name: "Sleep better",
                     dataType: "boolean"
                 },
             },
-        }
+        })
+        /* 
+        goal: buildProperty({
+            name: "goals",
+            dataType: "map",
+            properties: {
+                breakOldHabits: buildProperty({
+                    name: "Break old habits",
+
+                    dataType: "boolean"
+                }),
+                calmMind: buildProperty({
+                    name: "Calm mind",
+                    dataType: "boolean"
+                }),
+                dealWithCriticismAndNegativity: buildProperty({
+                    name: "Deal with criticism and negativity",
+                    dataType: "boolean"
+                }),
+                dealWithStress: buildProperty({
+                    name: "Deal with stress",
+                    dataType: "boolean"
+                }),
+                developNewHabits: buildProperty({
+                    name: "Develop new habits",
+                    dataType: "boolean"
+                }),
+                doesNotMatter: buildProperty({
+                    name: "Does not matter",
+                    dataType: "boolean"
+                }),
+                enhanceYourEnergyLevel: buildProperty({
+                    name: "Enhance your energy level",
+                    dataType: "boolean"
+                }),
+                gainBetterFocusAndWillpower: buildProperty({
+                    name: "Gain better focus and willpower",
+                    dataType: "boolean"
+                }),
+                getRidOfInsecurity: buildProperty({
+                    name: "Get rid of insecurity",
+                    dataType: "boolean"
+                }),
+                max15minPerDay: buildProperty({
+                    name: "Max15min per day",
+                    dataType: "boolean"
+                }),
+                max1hoursPerDay: buildProperty({
+                    name: "Max1hours per day",
+                    dataType: "boolean"
+                }),
+                max2hoursPerDay: buildProperty({
+                    name: "Max2hours per day",
+                    dataType: "boolean"
+                }),
+                oneTimePerWeek: buildProperty({
+                    name: "One time per week",
+                    dataType: "boolean"
+                }),
+                releaseTensionInMyBody: buildProperty({
+                    name: "Release tension in my body",
+                    dataType: "boolean"
+                }),
+                sleepBetter: buildProperty({
+                    name: "Sleep better",
+                    dataType: "boolean"
+                }),
+            },
+        })
+        */
     },
-})
+});

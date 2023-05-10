@@ -1,8 +1,5 @@
-import React from "react";
-import { TextField } from "@mui/material";
-import { FieldDescription, FieldProps } from "@camberi/firecms";
-import { Visibility } from "@mui/icons-material";
-const uuid = require('uuid');
+import {  FieldProps } from "firecms";
+import { v4 as uuid } from 'uuid';
 
 
 export default function CustomIdField({
@@ -17,7 +14,7 @@ export default function CustomIdField({
     ...props
 }: FieldProps<string>) {
     if (value == null) {
-        setValue(uuid.v4());
+        setValue(uuid());
     }
     return (
         <>

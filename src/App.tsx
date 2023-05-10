@@ -2,21 +2,20 @@ import React from "react";
 
 import { User as FirebaseUser } from "firebase/auth";
 import {
-  Authenticator,
-  buildCollection,
-  Entity,
-  FirebaseCMSApp,
-  NavigationBuilder,
-  NavigationBuilderProps,
-} from "@camberi/firecms";
+    Authenticator,
+    FirebaseCMSApp
+} from "firecms";
 
 import "typeface-rubik";
-import { guidedMeditations } from "./schemas/GuidedMeditation";
-import { masterclassSchema } from "./schemas/Masterclass";
-import { mindrestSchema } from "./schemas/Mindrest";
-import { mobilityMovementsSchema } from "./schemas/MobilityMovements";
-import { resourcesSchema } from "./schemas/Resources";
-import { User, usersSchema } from "./schemas/User";
+import "@fontsource/ibm-plex-mono";
+
+import { GuidedMeditation, guidedMeditationsCollection } from "./schemas/GuidedMeditation";
+import { Masterclass, masterclassCollection } from "./schemas/Masterclass";
+import { Mindrest, mindrestCollection } from "./schemas/Mindrest";
+import { Mindbreath, mindbreathCollection } from "./schemas/Mindbreath";
+import { MobilityMovements, mobilityMovementsCollection } from "./schemas/MobilityMovements";
+import { Resources, resourcesCollection } from "./schemas/Resources";
+import { User, usersCollection } from "./schemas/User";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3rpRb46oIOQ0TY7ZdL2yMg-V1yUQHeAw",
@@ -28,52 +27,19 @@ const firebaseConfig = {
   measurementId: "G-HDD4RDDLKG"
 };
 
+const collections = [
+  masterclassCollection,
+  mindbreathCollection,
+  mobilityMovementsCollection,
+  guidedMeditationsCollection,
+  mindrestCollection,
+  resourcesCollection,
+  usersCollection,
+]
+
 export default function App() {
 
-  const navigation: NavigationBuilder = async ({
-    user,
-    authController
-  }: NavigationBuilderProps) => {
 
-    return ({
-      collections: [
-        buildCollection({
-          path: "guided_meditations",
-          properties: guidedMeditations,
-          name: "Guided Meditations",
-        }),
-        buildCollection({
-          path: "masterclass",
-          properties: masterclassSchema,
-          name: "MasterClass",
-        }),
-        buildCollection({
-          path: "mindrests",
-          properties: mindrestSchema,
-          name: "Mindrests",
-        }),
-        buildCollection({
-          path: "mobility_movements",
-          properties: mobilityMovementsSchema,
-          name: "Mobility Movements",
-        }),
-        buildCollection({
-          path: "resources",
-          properties: resourcesSchema,
-          name: "Resources",
-
-        }),
-        buildCollection({
-          path: "users",
-          properties: usersSchema,
-          name: "Users",
-          permissions: ({ authController }) => ({
-            delete: false
-          }),
-        }),
-      ]
-    });
-  };
 
   const myAuthenticator: Authenticator<FirebaseUser> = async ({
     user,
@@ -86,13 +52,17 @@ export default function App() {
         const user = await dataSource.fetchEntity({
           path: "/users",
           entityId: userId,
-          schema: usersSchema
+          collection: usersCollection,
         })
-        if (user.values) {
-          if (user.values.role == "admin") {
-            return true
+        if (user != undefined) {
+          if (user.values) {
+            if (user.values.role == "admin") {
+              return true
+            } else {
+              throw Error("You do not have permission to access the panel")
+            }
           } else {
-            throw Error("You do not have permission to access the panel")
+            throw Error("You are not registered on the platform")
           }
         } else {
           throw Error("You are not registered on the platform")
@@ -108,11 +78,10 @@ export default function App() {
     logo="logo.png"
     name={"Mind Movement Admin"}
     authentication={myAuthenticator}
+    collections={collections}
     signInOptions={[
       'password',
-      'google.com',
     ]}
-    navigation={navigation}
     firebaseConfig={firebaseConfig}
   />;
 }

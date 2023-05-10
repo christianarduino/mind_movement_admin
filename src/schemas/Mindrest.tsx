@@ -1,6 +1,8 @@
-import { buildSchema } from "@camberi/firecms"
-const uuid = require('uuid');
-
+import { v4 as uuid } from 'uuid';
+import {
+    buildProperty,
+    buildCollection,
+} from "firecms";
 export type Mindrest = {
     bannerUrl: string,
     description: string,
@@ -10,11 +12,12 @@ export type Mindrest = {
     videoUrl: string,
 }
 
-export const mindrestSchema = buildSchema<Mindrest>({
-    name: "Mindrest",
+export const mindrestCollection = buildCollection<Mindrest>({
+    path: "mindrests",
+    name: "Mindrests", 
     properties: {
-        bannerUrl: {
-            title: "Banner image",
+        bannerUrl: buildProperty({
+            name: "Banner image",
             validation: { required: true },
             dataType: "string",
             config: {
@@ -27,33 +30,33 @@ export const mindrestSchema = buildSchema<Mindrest>({
                     },
                     acceptedFiles: ["image/*"],
                     fileName: () => {
-                        return uuid.v4();
+                        return uuid();
                     }
                 }
             }
-        },
-        description: {
-            title: "Description",
+        }),
+        description: buildProperty({
+            name: "Description",
             validation: { required: true },
             dataType: "string"
-        },
-        isAVideoForPremiumUsers: {
-            title: "Is a premium video?",
+        }),
+        isAVideoForPremiumUsers: buildProperty({
+            name: "Is a premium video?",
             validation: { required: true },
             dataType: "boolean"
-        },
-        title: {
-            title: "Title",
+        }),
+        title: buildProperty({
+            name: "Title",
             validation: { required: true },
             dataType: "string"
-        },
-        videoLength: {
-            title: "Video length",
+        }),
+        videoLength: buildProperty({
+            name: "Video length",
             validation: { required: true },
             dataType: "string"
-        },
-        videoUrl: {
-            title: "Video",
+        }),
+        videoUrl: buildProperty({
+            name: "Video",
             validation: { required: true },
             dataType: "string",
             config: {
@@ -66,10 +69,10 @@ export const mindrestSchema = buildSchema<Mindrest>({
                     },
                     acceptedFiles: ["video/*"],
                     fileName: () => {
-                        return uuid.v4();
+                        return uuid();
                     }
                 }
             }
-        },
+        }),
     }
 })
