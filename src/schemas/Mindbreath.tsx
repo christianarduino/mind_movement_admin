@@ -3,6 +3,7 @@ import {
     buildCollection,
     buildProperty,
 } from "firecms";
+import CustomVideoPreview from '../custom_fields/custom_file_upload';
 export type Mindbreath = {
     bannerUrl: string,
     description: string,
@@ -59,18 +60,15 @@ export const mindbreathCollection = buildCollection<Mindbreath>({
             name: "Video",
             validation: { required: true },
             dataType: "string",
-            config: {
-                url: true,
-                storageMeta: {
-                    storeUrl: true,
-                    mediaType: "video",
-                    storagePath: () => {
-                        return "videos";
-                    },
-                    acceptedFiles: ["video/*"],
-                    fileName: () => {
-                        return uuid();
-                    }
+            storage: {
+                storeUrl: true,
+                mediaType: "video",
+                storagePath: () => {
+                    return "videos";
+                },
+                acceptedFiles: ["video/*"],
+                fileName: () => {
+                    return uuid();
                 }
             }
         }),

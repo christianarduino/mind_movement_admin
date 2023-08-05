@@ -16,6 +16,7 @@ import { Mindbreath, mindbreathCollection } from "./schemas/Mindbreath";
 import { MobilityMovements, mobilityMovementsCollection } from "./schemas/MobilityMovements";
 import { Resources, resourcesCollection } from "./schemas/Resources";
 import { User, usersCollection } from "./schemas/User";
+import { Tickets, ticketsCollection } from "./schemas/Tickets";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3rpRb46oIOQ0TY7ZdL2yMg-V1yUQHeAw",
@@ -34,6 +35,7 @@ const collections = [
   guidedMeditationsCollection,
   mindrestCollection,
   resourcesCollection,
+  ticketsCollection,
   usersCollection,
 ]
 
