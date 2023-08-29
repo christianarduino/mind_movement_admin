@@ -20,20 +20,15 @@ export const guidedMeditationsCollection = buildCollection<GuidedMeditation>({
             name: "Banner image",
             validation: { required: true },
             dataType: "string",
-            config: {
-                url: true,
-                storageMeta: {
-                    storeUrl: true,
-                    mediaType: "image",
-                    storagePath: () => {
-                        return "images";
-                    },
-                    acceptedFiles: ["image/*"],
-                    fileName: () => {
-                        return uuid();
-                    }
+            storage: {
+                storagePath: "images",
+                storeUrl: true,
+                mediaType: "image",
+                acceptedFiles: ["image/*"],
+                fileName: (context) => {
+                    return uuid();
                 }
-            }
+            },
         }),
         description: buildProperty({
             name: "Description",
@@ -54,20 +49,15 @@ export const guidedMeditationsCollection = buildCollection<GuidedMeditation>({
             name: "Video",
             validation: { required: true },
             dataType: "string",
-            config: {
-                url: true,
-                storageMeta: {
-                    storeUrl: true,
-                    mediaType: "video",
-                    storagePath: () => {
-                        return "videos";
-                    },
-                    acceptedFiles: ["video/*"],
-                    fileName: () => {
-                        return uuid();
-                    }
+            storage: {
+                storagePath: "videos",
+                storeUrl: true,
+                mediaType: "video",
+                acceptedFiles: ["video/*"],
+                fileName: (context) => {
+                    return uuid();
                 }
-            }
+            },
         })
     }
 })

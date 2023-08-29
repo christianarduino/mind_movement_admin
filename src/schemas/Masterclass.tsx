@@ -36,7 +36,7 @@ export type Video = {
 
 export const masterclassCollection = buildCollection<Masterclass>({
     name: "Masterclass",
-    path: "masterclass", 
+    path: "masterclass",
     properties: {
         id: buildProperty({
             name: "Id",
@@ -60,40 +60,29 @@ export const masterclassCollection = buildCollection<Masterclass>({
             name: "Banner image",
             validation: { required: true },
             dataType: "string",
-            config: {
-                url: true,
-                storageMeta: {
-                    storeUrl: true,
-                    mediaType: "image",
-                    storagePath: () => {
-                        return "images";
-                    },
-                    acceptedFiles: ["image/*"],
-                    fileName: () => {
-                        return uuid();
-                    }
+            storage: {
+                storagePath: "images",
+                storeUrl: true,
+                mediaType: "image",
+                acceptedFiles: ["image/*"],
+                fileName: (context) => {
+                    return uuid();
                 }
-            }
-
+            },
         }),
         introVideoUrl: buildProperty({
             name: "Intro video",
             validation: { required: true },
             dataType: "string",
-            config: {
-                url: true,
-                storageMeta: {
-                    storeUrl: true,
-                    mediaType: "video",
-                    storagePath: () => {
-                        return "videos";
-                    },
-                    acceptedFiles: ["video/*"],
-                    fileName: () => {
-                        return uuid();
-                    }
+            storage: {
+                storagePath: "videos",
+                storeUrl: true,
+                mediaType: "video",
+                acceptedFiles: ["video/*"],
+                fileName: (context) => {
+                    return uuid();
                 }
-            }
+            },
         }),
         courses: buildProperty({
             name: "Courses",
@@ -114,20 +103,15 @@ export const masterclassCollection = buildCollection<Masterclass>({
                         name: "Course banner image",
                         validation: { required: true },
                         dataType: "string",
-                        config: {
-                            url: true,
-                            storageMeta: {
-                                storeUrl: true,
-                                mediaType: "image",
-                                storagePath: () => {
-                                    return "images";
-                                },
-                                acceptedFiles: ["image/*"],
-                                fileName: () => {
-                                    return uuid();
-                                }
+                        storage: {
+                            storagePath: "images",
+                            storeUrl: true,
+                            mediaType: "image",
+                            acceptedFiles: ["image/*"],
+                            fileName: (context) => {
+                                return uuid();
                             }
-                        }
+                        },
                     },
                     description: {
                         name: "Description",
@@ -153,20 +137,15 @@ export const masterclassCollection = buildCollection<Masterclass>({
                         name: "Video url",
                         validation: { required: true },
                         dataType: "string",
-                        config: {
-                            url: true,
-                            storageMeta: {
-                                storeUrl: true,
-                                mediaType: "video",
-                                storagePath: () => {
-                                    return "videos";
-                                },
-                                acceptedFiles: ["video/*"],
-                                fileName: () => {
-                                    return uuid();
-                                }
+                        storage: {
+                            storagePath: "videos",
+                            storeUrl: true,
+                            mediaType: "video",
+                            acceptedFiles: ["video/*"],
+                            fileName: (context) => {
+                                return uuid();
                             }
-                        }
+                        },
                     },
                     videos: {
                         dataType: "array",
@@ -187,20 +166,15 @@ export const masterclassCollection = buildCollection<Masterclass>({
                                     name: "Banner url",
                                     validation: { required: true },
                                     dataType: "string",
-                                    config: {
-                                        url: true,
-                                        storageMeta: {
-                                            storeUrl: true,
-                                            mediaType: "image",
-                                            storagePath: () => {
-                                                return "images";
-                                            },
-                                            acceptedFiles: ["image/*"],
-                                            fileName: () => {
-                                                return uuid();
-                                            }
+                                    storage: {
+                                        storagePath: "images",
+                                        storeUrl: true,
+                                        mediaType: "image",
+                                        acceptedFiles: ["image/*"],
+                                        fileName: (context) => {
+                                            return uuid();
                                         }
-                                    }
+                                    },
                                 },
                                 description: {
                                     name: "Description",
@@ -216,20 +190,15 @@ export const masterclassCollection = buildCollection<Masterclass>({
                                     name: "Video Url",
                                     validation: { required: true },
                                     dataType: "string",
-                                    config: {
-                                        url: true,
-                                        storageMeta: {
-                                            storeUrl: true,
-                                            mediaType: "video",
-                                            storagePath: () => {
-                                                return "videos";
-                                            },
-                                            acceptedFiles: ["video/*"],
-                                            fileName: () => {
-                                                return uuid();
-                                            }
+                                    storage: {
+                                        storagePath: "videos",
+                                        storeUrl: true,
+                                        mediaType: "video",
+                                        acceptedFiles: ["video/*"],
+                                        fileName: (context) => {
+                                            return uuid();
                                         }
-                                    }
+                                    },
                                 },
                             }
                         }

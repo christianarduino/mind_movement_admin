@@ -21,20 +21,15 @@ export const mindbreathCollection = buildCollection<Mindbreath>({
             name: "Banner image",
             validation: { required: true },
             dataType: "string",
-            config: {
-                url: true,
-                storageMeta: {
-                    storeUrl: true,
-                    mediaType: "image",
-                    storagePath: () => {
-                        return "images";
-                    },
-                    acceptedFiles: ["image/*"],
-                    fileName: () => {
-                        return uuid();
-                    }
+            storage: {
+                storagePath: "images",
+                storeUrl: true,
+                mediaType: "image",
+                acceptedFiles: ["image/*"],
+                fileName: (context) => {
+                    return uuid();
                 }
-            }
+            },
         }),
         description: buildProperty({
             name: "Description",
