@@ -28,6 +28,7 @@ export type Course = {
 
 export type Video = {
     id: string,
+    numberId: string,
     bannerUrl: string,
     description: string,
     title: string,
@@ -161,6 +162,11 @@ export const masterclassCollection = buildCollection<Masterclass>({
                                     config: {
                                         Field: CustomIdField,
                                     }
+                                },
+                                numberId:{
+                                    name: "Number Id",
+                                    validation: { required: true },
+                                    dataType: "string"
                                 },
                                 bannerUrl: {
                                     name: "Banner url",

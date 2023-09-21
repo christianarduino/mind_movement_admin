@@ -18,6 +18,7 @@ export type User = {
     pushNotification: boolean,
     isComplete: boolean,
     role: string,
+    userType: string,
     goal: {
         breakOldHabits: boolean,
         calmMind: boolean,
@@ -53,11 +54,18 @@ export const usersCollection = buildCollection({
             name: "Role",
             validation: { required: true },
             dataType: "string",
-            config: {
-                enumValues: {
-                    admin: "Admin",
-                    user: "User",
-                }
+            enumValues: {
+                admin: "Admin",
+                user: "User",
+            }
+        }),
+        userType: buildProperty({
+            name: "User Type",
+            validation: { required: true },
+            dataType: "string",
+            enumValues: {
+                Free: "Free",
+                Premium: "Premium",
             }
         }),
         email: buildProperty({
@@ -69,7 +77,7 @@ export const usersCollection = buildCollection({
         imageUrl: buildProperty({
             name: "Image url",
             description: "user profile picture",
-            validation: { required: true },
+            validation: { required: false },
             dataType: "string",
             config: {
                 url: true,
@@ -108,7 +116,7 @@ export const usersCollection = buildCollection({
         }),
         username: buildProperty({
             name: "Username",
-            validation: { required: true },
+            validation: { required: false },
             dataType: "string"
         }),
         pushNotification: buildProperty({
@@ -118,7 +126,7 @@ export const usersCollection = buildCollection({
         }),
         isComplete: buildProperty({
             name: "Profile complete",
-            validation: { required: true },
+            validation: { required: false },
             dataType: "boolean"
         }),
         goal: buildProperty({

@@ -3,7 +3,6 @@ import {
     buildCollection,
     buildProperty,
 } from "firecms";
-import CustomVideoPreview from '../custom_fields/custom_file_upload';
 export type Mindbreath = {
     bannerUrl: string,
     description: string,
